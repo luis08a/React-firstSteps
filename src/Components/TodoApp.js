@@ -8,14 +8,13 @@ export class TodoApp extends React.Component {
       items: [],
       text: '',
       priority: 0,
-      dueDate: null
+      dueDate: undefined
     };
-    // this.handleChange = this.handleChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   render() {
-    console.log(this.state.items);
     return (
       <div>
         <h3>TODO</h3>
@@ -23,29 +22,31 @@ export class TodoApp extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="new-text">
             What needs to be done?
-            </label>
+          </label>
           <input
             id="new-text"
+            name="text"
             onChange={this.handleChange}
             value={this.state.text}
           />
           <label htmlFor="new-priority">
             How much needs to be done?
-            </label>
+          </label>
           <input
             id="new-priority"
             type="number"
+            name="priority"
             onChange={this.handleChange}
-            value={this.state.text}
+            value={this.state.priority}
           />
           <label htmlFor="new-dueDate">
             When needs to be done?
-            </label>
+          </label>
           <input
             id="new-dueDate"
             type="date"
-            // onChange={this.handleChange}
-            value={this.state.text}
+            name="dueDate"
+            onChange={this.handleChange}
           />
           <button>
             Add #{this.state.items.length + 1}
@@ -55,17 +56,13 @@ export class TodoApp extends React.Component {
     );
   }
 
-  // handleChange(e) {
-  //   this.setState({
-  //      text: document.getElementById('new-text').value, 
-  //      priority: document.getElementById('new-priority').value, 
-  //      dueDate: document.getElementById('new-dueDate').value 
-  //   });
-  // }
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
 
   handleSubmit(e) {
     e.preventDefault();
-    if (!this.state.text.length || this.state.dueDate ==null) {
+    if (!this.state.text.length || this.state.dueDate == null || this.state.dueDate < 0) {
       return;
     }
     const newItem = {
@@ -77,7 +74,7 @@ export class TodoApp extends React.Component {
       items: prevState.items.concat(newItem),
       text: '',
       priority: 0,
-      dueDate: null,
+      dueDate: undefined,
       id: new Date()
     }));
   }

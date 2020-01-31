@@ -8,8 +8,8 @@ export class TodoList extends React.Component{
 
     todoList = () =>{
         const todos = this.props.items
-        const listTodo = todos.map((todo) =>
-            <li key={todo.id}>
+        const listTodo = todos.map((todo,i) =>
+            <li key={i}>
                <Todo text={todo.text} priority={todo.priority} dueDate={todo.dueDate}/>
             </li>
         )

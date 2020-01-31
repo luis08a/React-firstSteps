@@ -1,8 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import tl, { TodoList } from './TodoList';
-import { Todo } from './Todo';
+import tl, { TodoList } from './Components/TodoList';
+import { Todo } from './Components/Todo';
 
 function App() {
   const todos = [{ text: "Learn React", priority: 5, dueDate: new Date() },
